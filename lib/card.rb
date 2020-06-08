@@ -5,8 +5,4 @@ class Card
     @name = name
     @value = value
   end
-
-  def to_s
-    name.to_s
-  end
 end
