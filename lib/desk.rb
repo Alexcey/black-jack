@@ -1,8 +1,10 @@
+require_relative 'card.rb'
+
 class Desk
   attr_reader :desk_of_card
 
-  SUITS = %w[♠ ♥ ♣ ♦]
-  PICTURES = %w[Валет Дама Король]
+  SUITS = %w[♠ ♥ ♣ ♦].freeze
+  PICTURES = %w[Jack Queen King].freeze
 
   def initialize
     @desk_of_card = []
@@ -16,14 +18,14 @@ class Desk
   end
 
   def take_card
-    @desk_of_card.pop
+    desk_of_card.pop
   end
 
   private
 
   def generate_desk
     SUITS.each do |suit|
-      desk_of_card.push(Card.new(1, "Туз - #{suit}"))
+      desk_of_card.push(Card.new(1, "Ace - #{suit}"))
 
       (2..10).each do |value|
         desk_of_card.push(Card.new(value, "#{value} - #{suit}"))
