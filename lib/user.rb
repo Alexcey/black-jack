@@ -16,7 +16,7 @@ class User
 
   def take_card(desk)
     card = desk.take_card
-    ace_calculate if card.value == 1
+    ace_calc if card.value == 1
     @points += card.value
     @cards << card
   end
@@ -47,7 +47,7 @@ class User
 
   private
 
-  def ace_calculate
+  def ace_calc
     @points += @points + 11 <= BLACK_JACK ? 11 : 1
   end
 end

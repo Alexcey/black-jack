@@ -1,13 +1,13 @@
 require_relative 'interface.rb'
 require_relative 'user.rb'
+require_relative 'game.rb'
 
 class Blackjack
-
   attr_reader :player, :dealer
 
   def initialize
     initialize_game
-    #start_game
+    start_game
   end
 
   private
@@ -19,7 +19,10 @@ class Blackjack
   end
 
   def start_game
-
+    game = Game.new(@interface, @player, @dealer)
+    while game.status == 1
+      game.print_state
+      game.play
+    end
   end
 end
- 
