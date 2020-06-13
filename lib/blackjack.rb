@@ -1,13 +1,9 @@
-require_relative 'interface.rb'
 require_relative 'game.rb'
-require_relative 'player.rb'
-require_relative 'dealer.rb'
+require_relative 'interface.rb'
 
 class Blackjack
   def initialize
-    player = Player.new('Alex')
-    dealer = Dealer.new
-    game = Game.new(player, dealer)
+    game = Game.new
     Interface.new(game)
   end
 end
