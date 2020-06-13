@@ -3,7 +3,7 @@ class User
   RATE = 10
   MAX_CARDS = 3
   BLACK_JACK = 21
-  DEALER_STOP = 17
+  
 
   attr_reader :name, :balance, :points, :cards
 
