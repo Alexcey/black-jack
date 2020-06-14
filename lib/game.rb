@@ -67,15 +67,4 @@ class Game
     return dealer if player.points > player.class::BLACK_JACK
     return player if dealer.points > dealer.class::BLACK_JACK
   end
-
-  def play_again?
-    interface.play_again?
-    choice = gets.chomp.to_i
-    @status = case choice
-              when 1
-                1
-              else
-                0
-              end
-  end
 end
