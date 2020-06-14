@@ -1,20 +1,78 @@
-require_relative 'user.rb'
-
 class Interface
-  def initialize
-    start
+  attr_reader :game
+
+  def initialize(game)
+    @game = game
+    new_game
   end
 
-  def print_state(player, dealer)
-    puts "Bank #{player.name}: #{player.balance}. Bank dealer: #{dealer.balance}"
+  def new_game
+    main_menu
+    case gets.to_i
+    when 1
+      start
+    when 2
+      exit
+    end
   end
 
-  def print_bet(value)
-    puts "Bets are made. Bank #{2 * value}."
+  def start
+    print_state
+    game.play
+    print_bet(game.player.class::RATE)
+    print_cards(game.player, true)
+    print_point(game.player)
+    print_cards(game.dealer, false)
+    round
+  end
+
+  def round
+    game_menu
+    case gets.to_i
+    when 1
+      dealer_act
+    when 2
+      player_take_card
+    when 3
+      open_cards
+    end
+    play_again?
+  end
+
+  def dealer_act
+    dealer_take_card if game.dealer.can_take? && game.dealer.points < game.dealer.class::DEALER_STOP
+    open_cards if game.dealer.points > game.player.class::BLACK_JACK
+  end
+
+  def player_take_card
+    game.player_take_card
+    print_card_last(game.player, true)
+    print_point(game.player)
+    dealer_act
+  end
+
+  def open_cards
+    print_cards(game.dealer, true)
+    print_point(game.dealer)
+    game.result == 'draw' ? draw : print_winner(game.winner)
+  end
+
+  def dealer_take_card
+    game.dealer_act
+    print_card_last(game.dealer, false)
+    open_cards
+  end
+
+  def winner_user(player)
+    print_winner(player)
+  end
+
+  def draw
+    draw
   end
 
   def print_cards(player, show_card)
-    print "#{player.name} cards: "
+    puts "#{player.name} cards: "
     show_card ? (puts print_card(player)) : (puts '* - * * - *')
   end
 
@@ -39,23 +97,44 @@ class Interface
     puts 'Draw!'
   end
 
-  def round_choice
+  def play_again?
+    play_again
+    case gets.to_i
+    when 1
+      start
+    when 2
+      exit
+  end
+
+  private
+
+  def print_state
+    game.players.each { |user| print_bank(user) }
+  end
+
+  def print_bank(user)
+    puts "Bank #{user.name}: #{user.balance}."
+  end
+
+  def print_bet(value)
+    puts "Bets are made. Bank #{2 * value}."
+  end
+
+  def main_menu
+    puts '1 - New game'
+    puts '2 - Exit'
+  end
+
+  def game_menu
     puts 'Choice act:'
     puts '1 - Pass'
     puts '2 - More one.'
     puts '3 - Open card.'
   end
 
-  def play_again?
+  def play_again
     puts 'Game over! Next?'
     puts '1 - Yes'
     puts '2 - No'
-  end
-
-  private
-
-  def start
-    puts 'The game begins'
-    puts 'Enter your name'
   end
 end

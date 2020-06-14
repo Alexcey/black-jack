@@ -3,7 +3,6 @@ class User
   RATE = 10
   MAX_CARDS = 3
   BLACK_JACK = 21
-  
 
   attr_reader :name, :balance, :points, :cards
 
@@ -42,7 +41,8 @@ class User
   end
 
   def clear
-    card.clear
+    cards.clear
+    @points = 0
   end
 
   private
