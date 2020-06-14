@@ -3,7 +3,14 @@ class Interface
 
   def initialize(game)
     @game = game
+    ask_name
     new_game
+  end
+
+  def ask_name
+    puts "Input your name:"
+    name = gets.chomp.to_s
+    game.create_player(name)
   end
 
   def new_game
@@ -104,6 +111,7 @@ class Interface
       start
     when 2
       exit
+    end
   end
 
   private

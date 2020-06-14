@@ -6,10 +6,15 @@ class Game
   attr_reader :player, :dealer, :players, :status, :desk
 
   def initialize
-    @player = Player.new('Alex')
     @dealer = Dealer.new
-    @players = [player, dealer]
+    @players = []
+    @players << dealer
     @status = 1
+  end
+
+  def create_player(name)
+    @player = Player.new(name)
+    @players << player
   end
 
   def play
