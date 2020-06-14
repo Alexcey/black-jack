@@ -27,6 +27,7 @@ class User
 
   def calc_points
     return points if ace?
+
     @points -= 1
     @points + 11 <= BLACK_JACK ? (@points += 11) : (@points += + 1)
   end

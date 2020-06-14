@@ -8,7 +8,7 @@ class Interface
   end
 
   def ask_name
-    puts "Input your name:"
+    puts 'Input your name:'
     name = gets.chomp.to_s
     game.create_player(name)
   end
