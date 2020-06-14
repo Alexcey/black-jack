@@ -1,4 +1,3 @@
-require_relative 'card.rb'
 class User
   BANK = 100
   RATE = 10
@@ -27,10 +26,9 @@ class User
   end
 
   def calc_points
-    puts points
     return points if ace?
     @points -= 1
-    points + 11 <= BLACK_JACK ? @points + 11 : @points + 1
+    @points + 11 <= BLACK_JACK ? (@points += 11) : (@points += + 1)
   end
 
   def can_take?

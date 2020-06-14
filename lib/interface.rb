@@ -47,8 +47,8 @@ class Interface
   end
 
   def dealer_act
-    dealer_take_card if game.dealer.can_take? && game.dealer.points < game.dealer.class::DEALER_STOP
-    open_cards if game.dealer.points > game.player.class::BLACK_JACK
+    dealer_take_card if game.dealer.calc_points < game.dealer.class::DEALER_STOP
+    open_cards
   end
 
   def player_take_card
@@ -65,9 +65,9 @@ class Interface
   end
 
   def dealer_take_card
-    game.dealer_act
+    print_cards(game.dealer, true)
+    game.dealer_take_card
     print_card_last(game.dealer, false)
-    open_cards
   end
 
   def winner_user(player)
@@ -88,11 +88,11 @@ class Interface
   end
 
   def print_point(player)
-    puts "#{player.name} points: #{player.points}"
+    puts "#{player.name} points: #{player.calc_points}"
   end
 
   def print_card_last(player, show_card)
-    print "#{player.name} card: "
+    print "#{player.name} add card: "
     show_card ? (puts player.cards.last.name) : (puts '* - *')
   end
 

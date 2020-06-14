@@ -35,7 +35,7 @@ class Game
   end
 
   def dealer_act
-    dealer_take_card if dealer.can_take? && dealer.points < dealer.class::DEALER_STOP
+    # dealer_take_card if dealer.can_take? && dealer.calc_points < dealer.class::DEALER_STOP
     # open_cards if dealer.points > player.class::BLACK_JACK
   end
 
