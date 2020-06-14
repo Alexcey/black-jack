@@ -67,9 +67,9 @@ class Game
   end
 
   def winner
-    return player if player.points > dealer.points && player.points <= player.class::BLACK_JACK
-    return dealer if dealer.points > player.points && dealer.points <= dealer.class::BLACK_JACK
-    return dealer if player.points > player.class::BLACK_JACK
-    return player if dealer.points > dealer.class::BLACK_JACK
+    return player if player.calc_points > dealer.calc_points && player.calc_points <= player.class::BLACK_JACK
+    return dealer if dealer.calc_points > player.calc_points && dealer.calc_points <= dealer.class::BLACK_JACK
+    return dealer if player.calc_points > player.class::BLACK_JACK
+    return player if dealer.calc_points > dealer.class::BLACK_JACK
   end
 end
