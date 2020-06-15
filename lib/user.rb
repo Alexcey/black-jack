@@ -17,7 +17,7 @@ class User
     @ace = true
   end
 
-  def take_card#(desk)
+  def take_card(desk)
     card = desk.take_card
     @ace = false if card.value == 1
     @points += card.value
