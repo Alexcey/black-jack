@@ -1,20 +1,23 @@
+require_relative 'card.rb'
 class User
   BANK = 100
   RATE = 10
   MAX_CARDS = 3
   BLACK_JACK = 21
 
-  attr_reader :name, :balance, :points, :cards, :ace
+  attr_reader :name, :balance, :points, :cards, :ace, :calc_point
+  attr_accessor :points
 
   def initialize(name)
     @name = name
     @balance = BANK
     @cards = []
     @points = 0
+    @calc_point = 0
     @ace = true
   end
 
-  def take_card(desk)
+  def take_card#(desk)
     card = desk.take_card
     @ace = false if card.value == 1
     @points += card.value
@@ -26,10 +29,10 @@ class User
   end
 
   def calc_points
-    return points if ace?
-
-    @points -= 1
-    @points + 11 <= BLACK_JACK ? (@points += 11) : (@points += + 1)
+    @calc_point = points
+    return calc_point if ace?
+    return @calc_point += 10 if @calc_point + 10 <= BLACK_JACK
+    calc_point
   end
 
   def can_take?
